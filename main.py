@@ -55,7 +55,7 @@ def main_menu():
         pygame.display.flip()
 
 def settings_menu():
-    # Задаем кнопки главного меню
+    # Задаем кнопки меню настроек
     audio_button = ImageButton(WIDTH/2-(252/2), 500, 252, 74, "АУДИО", "green_button.jpg", "green_button_hover.jpg", "click.mp3")
     video_button = ImageButton(WIDTH/2-(252/2), 600, 252, 74, "ВИДЕО", "green_button.jpg", "green_button_hover.jpg", "click.mp3")
     back_button = ImageButton(WIDTH/2-(252/2), 700, 252, 74, "НАЗАД", "green_button.jpg", "green_button_hover.jpg", "click.mp3")
@@ -88,6 +88,35 @@ def settings_menu():
         pygame.display.flip()
 
 def new_game():
+    # Задаем кнопки игры
+    back_button = ImageButton(WIDTH/2-(252/2), 700, 252, 74, "НАЗАД", "green_button.jpg", "green_button_hover.jpg", "click.mp3")
+
+    running = True
+    while running:
+        screen.fill((0, 0, 0))
+        screen.blit(main_background, (0, 0))
+
+        font = pygame.font.Font(None, 72)
+        text_surface = font.render("ИГРА", True, (255, 255, 255))
+        text_rect = text_surface.get_rect(center=(WIDTH/2, 50))
+        screen.blit(text_surface, text_rect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.USEREVENT and event.button == back_button:
+                running = False
+
+            for btn in [back_button]:
+                btn.handle_event(event)
+
+        for btn in [back_button]:
+            btn.check_hover(pygame.mouse.get_pos())
+            btn.draw(screen)
+        pygame.display.flip()
 
 if __name__ == "__main__":
     main_menu()
