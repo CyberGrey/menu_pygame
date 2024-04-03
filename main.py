@@ -4,12 +4,15 @@ from button import ImageButton
 
 pygame.init()
 # Параметры экрана
-WIDTH, HEIGHT = 1280, 1280
+WIDTH, HEIGHT = 1024, 1024
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Main menu")
 main_background = pygame.image.load("background_img.jpg")               # фоновая картинка
 
+# Загрузка курсора
+cursor = pygame.image.load("cursor.png")
+pygame.mouse.set_visible(False)                                         # Скрываем стандартный курсор
 
 
 def main_menu():
@@ -52,6 +55,10 @@ def main_menu():
             btn.check_hover(pygame.mouse.get_pos())
             btn.draw(screen)
 
+        # Отрисовываем курсор
+        x, y = pygame.mouse.get_pos()
+        screen.blit(cursor, (x, y))
+
         pygame.display.flip()
 
 def settings_menu():
@@ -85,6 +92,11 @@ def settings_menu():
         for btn in [audio_button, video_button, back_button]:
             btn.check_hover(pygame.mouse.get_pos())
             btn.draw(screen)
+            
+        # Отрисовываем курсор
+        x, y = pygame.mouse.get_pos()
+        screen.blit(cursor, (x, y))
+
         pygame.display.flip()
 
 def new_game():
@@ -116,6 +128,11 @@ def new_game():
         for btn in [back_button]:
             btn.check_hover(pygame.mouse.get_pos())
             btn.draw(screen)
+
+            
+        # Отрисовываем курсор
+        x, y = pygame.mouse.get_pos()
+        screen.blit(cursor, (x, y))
         pygame.display.flip()
 
 if __name__ == "__main__":
